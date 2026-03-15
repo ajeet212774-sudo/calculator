@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Simple Calculator</h2>
+
+<form method="POST">
+    <label for="num1">First Number:</label>
+    <input type="number" step="any" name="num1" id="num1"
+           value="{{ num1 if num1 is not none else '' }}" required>
+
+    <label for="num2">Second Number:</label>
+    <input type="number" step="any" name="num2" id="num2"
+           value="{{ num2 if num2 is not none else '' }}" required>
+
+    <label for="operation">Operation:</label>
+    <select name="operation" id="operation" required>
+        <option value="">-- Select Operation --</option>
+        <option value="add" {% if operation == 'add' %}selected{% endif %}>Addition (+)</option>
+        <option value="subtract" {% if operation == 'subtract' %}selected{% endif %}>Subtraction (-)</option>
+        <option value="multiply" {% if operation == 'multiply' %}selected{% endif %}>Multiplication (×)</option>
+        <option value="divide" {% if operation == 'divide' %}selected{% endif %}>Division (÷)</option>
+    </select>
+
+    <button type="submit">Calculate</button>
+</form>
+
+{% if error %}
+<div class="error">{{ error }}</div>
+{% endif %}
+
+{% if result is not none %}
+<div class="result">
+    Result: {{ result }}
+</div>
+{% endif %}
+{% endblock %}
